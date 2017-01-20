@@ -13,7 +13,7 @@ module.exports =
 					"data:"
 					"http://#{host}"
 					"https://#{host}"
-					"blob:"
+					"https://app.ogcio.gov.hk"
 				]
 				ret = csp
 					directives:

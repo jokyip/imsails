@@ -23,6 +23,9 @@
 	</label>
 </div>
 <ion-content ng-class='{"has-subheader": subheader}'>
+	<div class="row">
+		<ng-include src="input"><ng-include>
+	</div>
 	<div class="row"
 		ng-repeat="model in collection.models |msgFilter:searchText |orderBy:'-createdAt'"
 		ng-include="'templates/chat/item.html'">
@@ -30,21 +33,18 @@
 	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
 	</ion-infinite-scroll>
 </ion-content>
-<ion-footer-bar class="item-input-inset">
-    <label class="item-input-wrapper">
-		<textarea rows='1' ng-model="msg" ng-change="row(msg)"></textarea>
-	</label>
-	<div class="buttons">
-	    <button class="button" ng-click="send()" ng-if="msg != ''">
-	    	<i class="icon ion-android-send"></i>
-	    </button>
-	    <label class="button" ng-if="msg == ''">
-	    	<i class="icon ion-paperclip"></i>
-		<input type="file" onchange="angular.element(this).scope().putfile(event.target.files)">
-	    </label>
-            <util-audio-recorder ng-if="device.platform == 'browser'"></util-audio-recorder>
-            <button class="button" ng-click="start()" ng-controller="AudioCtrl" ng-if="device.platform == 'iOS' || device.platform == 'Android'">
-              <i class="icon ion-mic-a"></i>
-            </button>
-    </div>
-</ion-footer-bar>
+<ion-tabs class="tabs-icon-left">
+	<ion-tab title="{{'Text' | translate}}"
+		icon="ion-android-textsms"
+		on-select="inputTemplate('templates/chat/inputText.html')">
+	</ion-tab>
+	<ion-tab title="{{'Attachment' | translate}}"
+		icon="ion-android-attach"
+		on-select="inputTemplate('templates/chat/inputAttachment.html')">
+	</ion-tab>
+	<ion-tab title="{{'Voice' | translate}}"
+		icon="ion-android-microphone"
+		on-select="inputTemplate('templates/chat/inputVoice.html')">
+	</ion-tab>
+</ion-tabs>
+

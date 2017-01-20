@@ -54,6 +54,9 @@ angular
 			me: me
 			collection: collection
 			msg: ''
+			input: 'templates/chat/inputText.html'
+			inputTemplate: (url) ->
+				$scope.input = url
 			loadMore: ->
 				collection.$fetch params: {type: type, to: chat.jid, sort: 'createdAt DESC'}
 					.then ->
@@ -61,6 +64,7 @@ angular
 				return @
 			# to control no of rows required for the input textarea
 			row: (msg) ->
+				$scope.msg = msg
 				rows = if msg == '' then 1 else Math.min(3, msg.split('\n').length)
 				$('textarea').attr('rows', rows).css('overflow-y', if rows == 1 then 'hidden' else 'scroll')
 				return false
