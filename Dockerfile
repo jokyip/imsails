@@ -1,7 +1,7 @@
 FROM beevelop/cordova
 
-ENV VER=${VER:-master} \
-    REPO=https://github.com/twhtanghk/imsails \
+ENV VER=${VER:-chatDefault} \
+    REPO=https://github.com/jokyip/imsails \
     APP=/usr/src/app
 
 RUN apt-get update && \
