@@ -74,6 +74,9 @@ angular
 					msg.$save()
 					$scope.msg = ''
 					$scope.row('')
+			cancel: ->
+				testmodels = $scope.models
+				testmodel = $scope.model
 			putfile: ($files) ->
 				if $files and $files.length != 0
 					attachment = new resource.Attachment type: type, to: chat.jid, local: $files[0]
