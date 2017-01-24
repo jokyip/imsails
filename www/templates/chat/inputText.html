@@ -1,12 +1,14 @@
-<div class="card" ng-class="'left'">
 	<div class="item-input-inset">
 		<label class="item-input-wrapper">
 			<textarea rows='1' ng-model="msg" ng-change="row(msg)"></textarea>
-		</label>
+	</div>
+	<div class = "row">
 		<div class="buttons">
-			<button class="button" ng-click="send()" ng-if="msg != ''">
-				<i class="icon ion-android-send"></i>
+			<button class="button" ng-click="send()">
+				<i class="icon icon ion-android-done"></i>
+			</button>
+			<button class="button" ng-click="cancel()">
+				<i class="icon icon ion-android-close"></i>
 			</button>
 		</div>
 	</div>
-</div>

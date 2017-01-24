@@ -244,6 +244,8 @@ angular.module('starter.model', ['ionic', 'PageableAR', 'util.file'])
 							return 'video'
 						else
 							return 'file'
+				else if msg.compose
+					return 'compose'
 				else
 					return 'msg'
 
@@ -260,6 +262,8 @@ angular.module('starter.model', ['ionic', 'PageableAR', 'util.file'])
 						"templates/chat/thumb.html"
 					when 'file'
 						"templates/chat/file.html"
+					when 'compose'
+						"templates/chat/inputText.html"
 					else
 						"templates/chat/msg.html"
 
