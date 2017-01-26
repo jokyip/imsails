@@ -1,15 +1,11 @@
-<div class="item-input-inset">
-		<label class="item-input-wrapper">
+<div class="list">
+	<div class="item item-input-inset">
+		<label class="item item-input-wrapper">
 			<textarea rows='1' ng-model="msg" ng-change="row(msg)"></textarea>
 		</label>
-		<p>
-		<div class="buttons">
-			<button class="button" ng-click="send()">
-				<i class="icon icon ion-android-done"></i>
-			</button>
-			<button class="button" ng-click="cancel()">
-				<i class="icon icon ion-android-close"></i>
-			</button>
-		</div>
-		</p>
+	</div>
+	<div class="item item-input-inset">
+		<ng-include src="'templates/chat/button.html'"></ng-include>
+	</div>
 </div>
+
