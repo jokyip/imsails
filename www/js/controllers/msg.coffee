@@ -75,8 +75,9 @@ angular
 					$scope.msg = ''
 					$scope.row('')
 			cancel: ->
-				testmodels = $scope.collection.models
-				testmodel = $scope.model
+				models = _.filter $scope.collection.models, (model) ->
+						_.isUndefined model.compose
+				$scope.collection.models = models
 			addMsg: (type) ->
 				$scope.collection.models.push new resource.Msg compose:true, from: me.jid
 			putfile: ($files) ->
