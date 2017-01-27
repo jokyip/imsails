@@ -54,9 +54,6 @@ angular
 			me: me
 			collection: collection
 			msg: ''
-			input: 'templates/chat/inputText.html'
-			inputTemplate: (url) ->
-				$scope.input = url
 			loadMore: ->
 				collection.$fetch params: {type: type, to: chat.jid, sort: 'createdAt DESC'}
 					.then ->
@@ -79,7 +76,8 @@ angular
 						_.isUndefined model.compose
 				$scope.collection.models = models
 			addMsg: (type) ->
-				$scope.collection.models.push new resource.Msg compose:true, from: me.jid
+				if(_.isUndefined  _.findWhere collection.models, compose:true)
+					$scope.collection.models.push new resource.Msg compose:true, from: me.jid
 			putfile: ($files) ->
 				if $files and $files.length != 0
 					attachment = new resource.Attachment type: type, to: chat.jid, local: $files[0]
