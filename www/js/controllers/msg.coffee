@@ -47,7 +47,7 @@ angular
 				# no more listen to those registered events
 				io.socket?.removeAllListeners 'msg'
 
-	.controller 'ChatCtrl', ($scope, $cordovaClipboard, $log, $ionicScrollDelegate, $location, type, chat, me, collection, resource, $cordovaFileTransfer, $http, audioService) ->
+	.controller 'ChatCtrl', ($scope, $cordovaClipboard, $log, $ionicScrollDelegate, $location, type, chat, me, collection, resource, $cordovaFileTransfer, $http, audioService, $ionicTabsDelegate) ->
 		_.extend $scope,
 			type: type
 			chat: chat
@@ -75,7 +75,8 @@ angular
 				models = _.filter $scope.collection.models, (model) ->
 						_.isUndefined model.compose
 				$scope.collection.models = models
-			addMsg: (type) ->
+			addMsg: (type, index) ->
+				$ionicTabsDelegate.select index
 				if(_.isUndefined  _.findWhere collection.models, compose:true)
 					$scope.collection.models.push new resource.Msg compose:true, from: me.jid
 			putfile: ($files) ->
