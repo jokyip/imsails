@@ -23,9 +23,6 @@
 	</label>
 </div>
 <ion-content ng-class='{"has-subheader": subheader}'>
-	<div class="row">
-		<ng-include src="input"><ng-include>
-	</div>
 	<div class="row"
 		ng-repeat="model in collection.models |msgFilter:searchText |orderBy:'-createdAt'"
 		ng-include="'templates/chat/item.html'">
@@ -35,16 +32,20 @@
 </ion-content>
 <ion-tabs class="tabs-icon-left">
 	<ion-tab title="{{'Text' | translate}}"
-		icon="ion-android-textsms"
-		on-select="inputTemplate('templates/chat/inputText.html')">
+		icon="ion-android-textsms" 
+		ng-click="addMsg('text',0)" href="#">
 	</ion-tab>
+	<ion-tab title="{{'Photo' | translate}}"
+                icon="ion-android-camera" 
+                ng-click="addMsg('img', 1)" href="#">
+        </ion-tab>
+	<ion-tab title="{{'Voice' | translate}}"
+                icon="ion-android-microphone"
+                ng-click="addMsg('audio', 2)" href="#">
+        </ion-tab>
 	<ion-tab title="{{'Attachment' | translate}}"
 		icon="ion-android-attach"
-		on-select="inputTemplate('templates/chat/inputAttachment.html')">
-	</ion-tab>
-	<ion-tab title="{{'Voice' | translate}}"
-		icon="ion-android-microphone"
-		on-select="inputTemplate('templates/chat/inputVoice.html')">
+		ng-click="addMsg('file', 3)" href="#">
 	</ion-tab>
 </ion-tabs>
 

@@ -47,16 +47,13 @@ angular
 				# no more listen to those registered events
 				io.socket?.removeAllListeners 'msg'
 
-	.controller 'ChatCtrl', ($scope, $cordovaClipboard, $log, $ionicScrollDelegate, $location, type, chat, me, collection, resource, $cordovaFileTransfer, $http, audioService) ->
+	.controller 'ChatCtrl', ($scope, $cordovaClipboard, $log, $ionicScrollDelegate, $location, type, chat, me, collection, resource, $cordovaFileTransfer, $http, audioService, $ionicTabsDelegate) ->
 		_.extend $scope,
 			type: type
 			chat: chat
 			me: me
 			collection: collection
 			msg: ''
-			input: 'templates/chat/inputText.html'
-			inputTemplate: (url) ->
-				$scope.input = url
 			loadMore: ->
 				collection.$fetch params: {type: type, to: chat.jid, sort: 'createdAt DESC'}
 					.then ->
@@ -74,6 +71,14 @@ angular
 					msg.$save()
 					$scope.msg = ''
 					$scope.row('')
+			cancel: ->
+				models = _.filter $scope.collection.models, (model) ->
+						_.isUndefined model.compose
+				$scope.collection.models = models
+			addMsg: (type, index) ->
+				$ionicTabsDelegate.select index
+				if(_.isUndefined  _.findWhere collection.models, compose:true)
+					$scope.collection.models.push new resource.Msg compose:true, from: me.jid
 			putfile: ($files) ->
 				if $files and $files.length != 0
 					attachment = new resource.Attachment type: type, to: chat.jid, local: $files[0]
